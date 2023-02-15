@@ -19,8 +19,12 @@ def test_capitilize(string, result):   # объявляем тест
     assert res == result               # сравниваем фактический результат (res) и ожидаемый(result)
 
 
-@pytest.mark.parametrize('string, result', [(' skypro', 'skypro'), (' Skypro', 'Skypro'), (' Skypro23', 'Skypro23'),
-                                            (' skypro skypro', 'skypro skypro'), ('skypro', 'skypro'), ("     ", ""),
+@pytest.mark.parametrize('string, result', [(' skypro', 'skypro'),
+                                            (' Skypro', 'Skypro'),
+                                            (' Skypro23', 'Skypro23'),
+                                            (' skypro skypro', 'skypro skypro'),
+                                            ('skypro', 'skypro'),
+                                            ("     ", ""),
                                             ("  The best music is rock  ", "The best music is rock  ")])
 def test_trim(string, result):
     string_ut = StringUtils()
@@ -29,7 +33,8 @@ def test_trim(string, result):
 
 
 @pytest.mark.parametrize('string, delimeter, result', [('s,k,y,p,r,o', ',', ["s", "k", "y", "p", "r", "o"]),
-                                                       ("1:2:3", ':', ["1", "2", "3"]), ('', ', ', [])])
+                                                       ("1:2:3", ':', ["1", "2", "3"]),
+                                                       ('', ', ', [])])
 def test_list_delimeter(string, delimeter, result):
     string_ut = StringUtils()
     res = string_ut.to_list(string, delimeter)
@@ -42,16 +47,18 @@ def test_default_to_list():
     assert res == ["12345", "12345", "12345"]
 
 
-@pytest.mark.parametrize('string, symbol, result',
-                         [('skypro', 's', True), ('skypro', 'z', False), ("The best music is rock", "e", True),
-                          ("The best music is rock", " ", True)])
+@pytest.mark.parametrize('string, symbol, result', [('skypro', 's', True),
+                                                    ('skypro', 'z', False),
+                                                    ("The best music is rock", "e", True),
+                                                    "The best music is rock", " ", True)])
 def test_contain_is(string, symbol, result):
     string_ut = StringUtils()
     res = string_ut.contains(string, symbol)
     assert res == result
 
 
-@pytest.mark.parametrize('string, symbol, result', [('skypro', 's', 'kypro'), ('skypro', '', 'skypro'),
+@pytest.mark.parametrize('string, symbol, result', [('skypro', 's', 'kypro'),
+                                                    ('skypro', '', 'skypro'),
                                                     ("The best music is rock", " ", "Thebestmusicisrock")])
 def test_delete_symbol(string, symbol, result):
     string_ut = StringUtils()
@@ -59,7 +66,8 @@ def test_delete_symbol(string, symbol, result):
     assert res == result
 
 
-@pytest.mark.parametrize('string, symbol, result', [('skypro', 's', True), ("The best music is rock", "T", True),
+@pytest.mark.parametrize('string, symbol, result', [('skypro', 's', True),
+                                                    ("The best music is rock", "T", True),
                                                     (" The best music is rock ", " The", True),
                                                     (' skypro', ' ', True)])
 def test_starts_with_true(string, symbol, result):
@@ -68,17 +76,20 @@ def test_starts_with_true(string, symbol, result):
     assert res == result
 
 
-@pytest.mark.parametrize('string, symbol, result',
-                         [('skypro', 'o', True), ("The best music is rock", "The best music is rock", True),
-                          (" The best music is rock ", " ", True), ('skypro ', ' ', True)])
+@pytest.mark.parametrize('string, symbol, result', [('skypro', 'o', True),
+                                                    ("The best music is rock", "The best music is rock", True),
+                                                    (" The best music is rock ", " ", True),
+                                                    ('skypro ', ' ', True)])
 def test_end_with_true(string, symbol, result):
     string_ut = StringUtils()
     res = string_ut.end_with(string, symbol)
     assert res == result
 
 
-@pytest.mark.parametrize('string, result',
-                         [('skypro', False), ('', True), ('  ', True), (" The best music is rock ", False)])
+@pytest.mark.parametrize('string, result',[('skypro', False),
+                                           ('', True),
+                                           ('  ', True),
+                                           (" The best music is rock ", False)])
 def test_is_empty(string, result):
     string_ut = StringUtils()
     res = string_ut.is_empty(string)
